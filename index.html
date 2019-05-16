@@ -2,12 +2,16 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="styles.css">
-
+    <script src="scriptFile.js"></script>
     <title>Homework</title>
   </head>
-  <body>
+  <body onload="lightCell(); goodBye()">
     <div class="container">
       <div class="card">
       <header class="header card-header">
@@ -19,7 +23,7 @@
       </header>
       <article class="">
       <div class="row">
-        <p class="col-sm-12 text-sm-center card-text">The grand food exhibition is an exhibition with food from all over the world! come meet with the greatest chefs and eat the greatest food! <br>
+        <p id="description" class="col-sm-12 text-sm-center card-text" onmouseover="getLarger(this.id)">The grand food exhibition is an exhibition with food from all over the world! come meet with the greatest chefs and eat the greatest food! <br>
            a great communuity with a great sense of taste, once you go in you'll never want to eat normal food again!</p>
       </div>
       <div class="row ">
@@ -28,13 +32,49 @@
         <img class="col-sm-4 article-image" src="three.jpg" alt="image"/>
       </div>
       <div class="row agenda">
+        <div class="col-sm-6">
+          <br>
         <ul>
           <lh><b>What's on the menu?</b></lh>
         <li>Great food that will leave you with that "MORE!" taste</li>
         <li>Wonderful community of people</li>
         <li>Exotic and adventurous</li>
+          <li>World's top chefs</li>
+          <li>Hot & Cold food competitions</li>
+          <li>Beer and Wine bars</li>
+          <li>Cooking lectures</li>
+          <li>Ans So Much More...!!!</li>
         </ul>
-      </div>
+        </div>
+        <!-- Carousel From Here -->
+        <div class="col-sm-6">
+          <br>
+          <div id="carousel1" class="carousel slide" data-ride="carousel" data-interval="false">
+            <b>Enjoy our food gallery</b>
+            <!-- The slideshow -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="container/1.jpg" alt="Food-Picrue">
+              </div>
+              <div class="carousel-item">
+                <img src="container/2.jpg" alt="Food-Picrue">
+              </div>
+              <div class="carousel-item">
+                <img src="container/3.jpg" alt="Food-Picrue">
+              </div>
+              <div class="carousel-item">
+                <img src="container/4.jpg" alt="Food-Picrue">
+              </div>
+            </div>
+
+            <!-- Next -->
+            <a class="carousel-control-next" data-target="#carousel1" data-slide="next">
+              <h6 id="next">Next</h6>
+            </a>
+          </div>
+        </div>
+        <!--Carousel till here -->
+        </div>
       <details close >
         <summary><b>&#x1F4CD Find us on google maps </b></summary>
       <iframe class="google-maps" id="gmap_canvas" src="https://maps.google.com/maps?q=sapir%20university&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
@@ -70,47 +110,87 @@
   <a class="col-sm-3" href="http://youtube.com"><img class="  social-image" src="twitter.png" alt="twitter"/> Twitter</a>
   <a class="col-sm-3" href="http://twitter.com"><img class=" social-image" src="youtube.png" alt="youtube"/> Youtube</a>
 </div>
+<!-- form -->
+        <form id="registration-form">
+          <h2>Register now!</h2>
 
-<form id="registration-form">
-  <h2>Register now!</h2>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+          </div>
 
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email">
-  </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="phone" class="form-control" id="phone" pattern="[0-9]{9,10}" title="9-10 Digits" placeholder="Enter phone" required>
+          </div>
 
-  <div class="form-group">
-    <label for="phone">Phone</label>
-    <input type="phone" class="form-control" id="phone" placeholder="Enter email">
-  </div>
+          <div class="form-group">
+            <label for="name">Full name</label>
+            <input  class="form-control" id="name" pattern="[A-Za-z]{1,}[\s]{0,1}[A-Za-z]{1,}" title="Only-Letters & Just one space" placeholder="Enter your full name" required>
+          </div>
 
-  <div class="form-group">
-    <label for="name">Full name</label>
-    <input  class="form-control" id="name" placeholder="Enter your full name">
-  </div>
-
-  <div class="form-group">
-    <label for="nguests">Number of guests</label>
-    <input  class="form-control" id="nguests"placeholder="How many of you are coming">
-  </div>
+          <div class="form-group">
+            <label for="nguests">Number of guests</label>
+            <input  type="number" class="form-control" id="nguests" min="1" placeholder="How many of you are coming" required>
+          </div>
 
 
-  <div class="form-group">
-    <label for="comment">Comments</label>
-    <textarea name="comment" rows="8" cols="80"  class="form-control" id="nguests"placeholder="Anything you want to tell us?" ></textarea>
-  </div>
-  <div class="form-group form-check">
-    <input type="checkbox" class="form-check-input" id="shuttle">
-    <label class="form-check-label" for="shuttle">Coming by shuttle</label>
-  </div>
+          <div class="form-group">
+            <label for="comment">Comments</label>
+            <textarea name="comment" onkeyup='txtCounter(this.id,this.maxLength,"status1");' rows="4" cols="40" maxlength="200" class="form-control" id="comment" placeholder="Anything you want to tell us?" ></textarea>
+            <p id="status1"></p>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="shuttle">
+            <label class="form-check-label" for="shuttle">Coming by shuttle</label>
+          </div>
 
-  <button type="submit" class="btn btn-dark">Submit</button>
-</form>
+          <button type="submit" class="btn btn-dark">Submit</button>
+        </form>
+<!-- end of form -->
       </article>
-      <footer>
-        <small>All rights reserve to <a href="https://github.com/matan1905">Matan & Dani</a>, you can also <a href=""mailto:ematan1905@gmail.com?subject=food&body=I+like+it">Contact us</a></small>
+        <footer>
+          <div class="container">
+            <small>All rights reserve to <a href="https://github.com/matan1905">Matan & Daniel</a>, you can also</small>
+            <a href data-toggle="modal" data-target="#contactModal">
+              <small>Contact Us</small>
+            </a>
+            <!-- Modal -->
+            <div class="modal fade" id="contactModal">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Contact Us</h4>
+                  </div>
 
-      </footer>
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-6">
+                        <img src="mail.jpg" width=100%>
+                      </div>
+                      <div class="col-sm-6 text-sm-center">
+                        <p>
+                          <a class="btn btn-info" role="button" href="mailto:ematan1905@gmail.com?subject=food&body=I+like+it">Start Writing The Mail</a>
+                        </p>
+                        <p>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Close Window</button>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer text-center d-block">
+                    <h6>Thank you :)</h6>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
     </div>
     </div>
   </body>
